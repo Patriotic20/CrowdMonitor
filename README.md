@@ -16,6 +16,7 @@ This project is designed to detect and record human presence from camera feeds u
 
 ### 🔹 Backend
 - **FastAPI** — Build a fast and asynchronous REST API for managing detections and camera data.  
+- **Uvicorn** — ASGI server used to run the FastAPI application.  
 - **Pydantic** — Validate and serialize request/response models for the API.  
 - **attrs** — Simplify data class creation for internal logic and configurations.
 
@@ -52,11 +53,12 @@ It combines computer vision and backend technologies to provide a complete detec
    - Detection results (camera ID, timestamp, people count, optional image path) are stored in a PostgreSQL database.  
    - SQLAlchemy handles ORM mapping, while Alembic manages schema migrations.
 
-4. **Backend API (FastAPI)**  
+4. **Backend API (FastAPI + Uvicorn)**  
    - FastAPI provides REST endpoints to:
      - Retrieve detection history  
      - Query data by camera, time, or count  
      - Register new cameras  
+   - Uvicorn serves the FastAPI app using ASGI, enabling high performance and async features.  
    - Pydantic and attrs ensure clean validation and serialization of data models.
 
 5. **Containerization (Docker + Docker Compose)**  
@@ -72,7 +74,7 @@ Camera (OpenCV)
    ↓
 YOLO Model → Detect people
    ↓
-Backend (FastAPI)
+Backend (FastAPI + Uvicorn)
    ↓
 Database (PostgreSQL via SQLAlchemy)
    ↓
